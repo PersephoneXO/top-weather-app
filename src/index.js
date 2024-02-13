@@ -5,12 +5,12 @@
 import { dataManager } from "./data-manager";
 
 //DOM elements
-const searchButton=document.querySelector('.search-button');
+//const searchButton=document.querySelector('.search-button');
+const searchBar=document.querySelector('#search-bar');
 
-
-searchButton.addEventListener('click',(e)=>{
+searchBar.addEventListener('submit', async (e)=>{
     e.preventDefault();
-    //let location=document.querySelector('#location').value;
-    let locationData=dataManager.getData();
-    console.log(locationData);
+    let weatherData=await dataManager.getData();
+    console.log(weatherData);
+
 });
