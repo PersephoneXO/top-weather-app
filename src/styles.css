@@ -4,7 +4,7 @@ html, body{
     margin: 0;
     padding: 0;
     font-family: "Aleo", serif;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 .content{

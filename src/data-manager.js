@@ -36,15 +36,15 @@ export const dataManager=(function(){
         let currentTextDiv=createDOM('div','mc-current-text');
         //location title
         let locationTitle=createDOM('p','location-title');
-        locationTitle.textContents=`${data.location.name}`;
+        locationTitle.textContent=`${data.location.name}`;
         currentTextDiv.appendChild(locationTitle);
         //current condition
         let currentCondition=createDOM('p','current-condition');
-        currentCondition.textContents=`${data.current.condition.text}`;
+        currentCondition.textContent=`${data.current.condition.text}`;
         currentTextDiv.appendChild(currentCondition);
         //current temp
         let currentTemp=createDOM('p','current-temp');
-        currentTemp.textContents=`${data.current.temp_c}°C`;
+        currentTemp.textContent=`${data.current.temp_c}°C`;
         currentTextDiv.appendChild(currentTemp);
         mainContainerCurrent.appendChild(currentTextDiv);
         //current condition image
@@ -60,7 +60,7 @@ export const dataManager=(function(){
         let mainContainerToday=createDOM('div','main-container-today');
         //today's forecast title
         let todayForecast=createDOM('p','mc-today-title');
-        todayForecast.textContents="Today's Forecast"
+        todayForecast.textContent="Today's forecast"
         mainContainerToday.appendChild(todayForecast);
         //hours container
         let todayConditions=createDOM('div','mc-today-hours-container');
@@ -68,30 +68,48 @@ export const dataManager=(function(){
         let sixAM=getDataAtSpecificTime(data.forecast.forecastday[0],"6");
         todayConditions.appendChild(createHourContainer('6:00 AM',sixAM.condition.icon,sixAM.temp_c));
         //12pm condition
-        let twelvePM=getDataAtSpecificTime(data.forecast.forecastday[1],"12");
-        todayConditions.appendChild('12:00 PM', twelvePM.condition.icon, twelvePM.temp_c);
+        let twelvePM=getDataAtSpecificTime(data.forecast.forecastday[0],"12");
+        todayConditions.appendChild(createHourContainer('12:00 PM', twelvePM.condition.icon, twelvePM.temp_c));
         //6pm condition
-        let sixPM=getDataAtSpecificTime(data.forecast.forecastday[2],"18");
+        let sixPM=getDataAtSpecificTime(data.forecast.forecastday[0],"18");
         todayConditions.appendChild(createHourContainer('6:00 PM', sixPM.condition.icon, sixPM.temp_c));
         mainContainerToday.appendChild(todayConditions);
         mainContainerToday.appendChild(divDivider);
         mainContainerContent.appendChild(mainContainerToday);
         //
         //3-day forecast container
+        let mainContainerThree=createDOM('div','main-container-three');
+        //3-day title
+        let threeTitle=createDOM('p','mc-three-title');
+        threeTitle.textContent="3-day forecast";
+        mainContainerThree.appendChild(threeTitle);
+        //days container
+        let threeConditions=createDOM('div','mc-three-days-container');
+        //day 1
+        threeConditions.appendChild(createDayContainers(data.forecast.forecastday[0],'yes'));
+        threeConditions.appendChild(divDivider);
+        //day 2
+        threeConditions.appendChild(createDayContainers(data.forecast.forecastday[1]));
+        threeConditions.appendChild(divDivider);
+        //day 3
+        threeConditions.appendChild(createDayContainers(data.forecast.forecastday[2]));
+        mainContainerThree.appendChild(threeConditions);
+        mainContainerContent.appendChild(mainContainerThree);
+        return mainContainerContent;
     }
 
     //function to create each of the hour containers
     function createHourContainer(time,icon,temp){
         let hourContainer=createDOM('div','hour-container');
-        let time=createDOM('p','mc-today-time');
-        time.textContents=`${time}`;
-        hourContainer.appendChild(time);
-        let icon=createDOM('img','mc-today-img');
-        icon.setAttribute('src',icon);
-        hourContainer.appendChild(icon);
-        let temp=createDOM('p','mc-today-temp');
-        temp.textContents=`${temp}°C`;
-        hourContainer.appendChild(temp);
+        let todayTime=createDOM('p','mc-today-time');
+        todayTime.textContent=`${time}`;
+        hourContainer.appendChild(todayTime);
+        let todayIcon=createDOM('img','mc-today-img');
+        todayIcon.setAttribute('src',icon);
+        hourContainer.appendChild(todayIcon);
+        let todayTemp=createDOM('p','mc-today-temp');
+        todayTemp.textContent=`${temp}°C`;
+        hourContainer.appendChild(todayTemp);
         return hourContainer;
     }
 
@@ -119,6 +137,39 @@ export const dataManager=(function(){
         return timeData;
     }
 
+    //function to create each of the 3-day forecast containers
+    function createDayContainers(day, today='no'){
+        let date=new Date(day.date);
+        let dayIndex=date.getDay();
+        let dayNames=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+        let dayOfWeek=dayNames[dayIndex];
+        let dayContainer=createDOM('div','day-container');
+        //weekday
+        let weekday=createDOM('p','three-day-weekday');
+        if(today=='no'){
+            weekday.textContent=`${dayOfWeek}`;
+        }else{
+            weekday.textContent='Today';
+        }
+        dayContainer.appendChild(weekday);
+        //condition container
+        let conditionContainer=createDOM('div','three-day-condition-container');
+        //condition icon
+        let conditionIcon=createDOM('img','three-day-icon');
+        conditionIcon.setAttribute('src',day.day.condition.icon);
+        conditionContainer.appendChild(conditionIcon);
+        //condition text
+        let conditionText=createDOM('p','three-day-condition');
+        conditionText.textContent=`${day.day.condition.text}`;
+        conditionContainer.appendChild(conditionText);
+        dayContainer.appendChild(conditionContainer);
+        //avg temp
+        let avgTemp=createDOM('p','three-day-temp');
+        avgTemp.textContent=`${day.day.avgtemp_c}°C`;
+        dayContainer.appendChild(avgTemp);
+        return dayContainer
+
+    }
 
     return{
         getData,
