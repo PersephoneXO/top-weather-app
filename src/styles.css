@@ -52,12 +52,21 @@ html, body{
 }
 
 
+
 /*main*/
 .main-container{
     grid-area: main;
     display: flex;
     justify-content: center;
     margin-top: 10px;
+}
+
+
+/*landing page*/
+.landing-page-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 
@@ -81,7 +90,7 @@ html, body{
 
 .current-condition{
     font-size: 16px;
-    margin-bottom: 32px;
+    margin-bottom: 25px;
 }
 
 .current-temp{
