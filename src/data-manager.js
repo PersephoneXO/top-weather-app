@@ -52,9 +52,9 @@ export const dataManager=(function(){
         currentImage.setAttribute('src',`${data.current.condition.icon}`);
         mainContainerCurrent.appendChild(currentImage);
         //div divider
-        let divDivider=createDOM('hr','dom-divider');
-        mainContainerCurrent.appendChild(divDivider);
+        let divDividerCurrent=createDOM('hr','dom-divider');
         mainContainerContent.appendChild(mainContainerCurrent);
+        mainContainerContent.appendChild(divDividerCurrent);
         //
         //today's forecast container
         let mainContainerToday=createDOM('div','main-container-today');
@@ -74,7 +74,8 @@ export const dataManager=(function(){
         let sixPM=getDataAtSpecificTime(data.forecast.forecastday[0],"18");
         todayConditions.appendChild(createHourContainer('6:00 PM', sixPM.condition.icon, sixPM.temp_c));
         mainContainerToday.appendChild(todayConditions);
-        mainContainerToday.appendChild(divDivider);
+        let divDividerToday=createDOM('hr','dom-divider');
+        mainContainerToday.appendChild(divDividerToday);
         mainContainerContent.appendChild(mainContainerToday);
         //
         //3-day forecast container
@@ -87,10 +88,12 @@ export const dataManager=(function(){
         let threeConditions=createDOM('div','mc-three-days-container');
         //day 1
         threeConditions.appendChild(createDayContainers(data.forecast.forecastday[0],'yes'));
-        threeConditions.appendChild(divDivider);
+        let divDividerThree1=createDOM('hr','dom-divider');
+        threeConditions.appendChild(divDividerThree1);
         //day 2
         threeConditions.appendChild(createDayContainers(data.forecast.forecastday[1]));
-        threeConditions.appendChild(divDivider);
+        let divDividerThree2=createDOM('hr','dom-divider');
+        threeConditions.appendChild(divDividerThree2);
         //day 3
         threeConditions.appendChild(createDayContainers(data.forecast.forecastday[2]));
         mainContainerThree.appendChild(threeConditions);
