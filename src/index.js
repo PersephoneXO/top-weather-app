@@ -14,13 +14,11 @@ document.addEventListener('DOMContentLoaded',()=>{
     mainContainer.appendChild(dataManager.createLandingPage());
 });
 
-
+//show data on page load
 searchBar.addEventListener('submit', async (e)=>{
     e.preventDefault();
     let weatherData=await dataManager.getData();
-
     mainContainer.innerHTML="";
     let weatherContent=await dataManager.showData(weatherData);
     mainContainer.appendChild(weatherContent);
-
 });
