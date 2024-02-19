@@ -201,10 +201,23 @@ export const dataManager=(function(){
         return container;
     }
 
+    //function to show loader
+    function showLoader(loader){
+        loader.style.display='block';
+    }
+
+    //function to hide loader
+    function hideLoader(loader){
+        loader.style.display='none';
+    }
+
+
     return{
         getData,
         showData,
         createLandingPage,
-        createErrorPage
+        createErrorPage,
+        showLoader,
+        hideLoader
     }
 })();
