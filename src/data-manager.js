@@ -4,7 +4,7 @@ function createDOM(type,className){
     return element;
 }
 
-import weatherImage from '../src/weather-landing-page-img.svg';
+import weatherImage from '/dist/1466ef00c00a12679445.svg';
 
 export const dataManager=(function(){
     //function to get whatever the user inputted into the search bar
