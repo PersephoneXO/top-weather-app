@@ -63,11 +63,22 @@ html, body{
 
 
 /*landing page*/
-.landing-page-container{
+.landing-page-container, .error-page-container{
     display: flex;
     flex-direction: column;
     align-items: center;
+    text-align: center;
 }
+
+.error-page-container{
+    margin-top: 50px;
+}
+
+#error-page-img{
+    height: 300px;
+    margin-top: 50px;
+}
+
 
 
 /*current container*/
