@@ -9,9 +9,11 @@ html, body{
 
 .content{
     display: grid;
-    grid-template-areas: 'header' 'main-container';
-    height: 100vh;
-    grid-template-rows: 15vh 85vh;
+    grid-template-areas: 'header'
+    'main-container'
+    'footer';
+    min-height: 100vh;
+    grid-template-rows: 10vh 80vh 10vh;
 }
 
 
@@ -58,7 +60,7 @@ html, body{
     grid-area: main;
     display: flex;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: 50px;
 }
 
 
@@ -235,4 +237,10 @@ html, body{
     .three-day-temp{
         font-weight: bold;
         grid-area: temp;
+    }
+
+    footer{
+        grid-area: footer;
+        margin-top: auto;
+        text-align: center;
     }
