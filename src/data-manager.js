@@ -4,6 +4,8 @@ function createDOM(type,className){
     return element;
 }
 
+import weatherImage from '../src/weather-landing-page-img.svg';
+
 export const dataManager=(function(){
     //function to get whatever the user inputted into the search bar
     function getLocation(){
@@ -181,7 +183,7 @@ export const dataManager=(function(){
         text.textContent="Enter your location to get started!";
         container.appendChild(text);
         let img=createDOM('img','landing-page-img');
-        img.setAttribute('src','/src/weather-landing-page-img.svg');
+        img.setAttribute('src',weatherImage);
         container.appendChild(img);
         let attribution=createDOM('p','img-attr');
         attribution.innerHTML='<a href="https://www.freepik.com/free-vector/earth-moon-concept-illustration_22881458.htm#query=globe&position=40&from_view=search&track=sph&uuid=40530c76-ce83-4458-ab7f-a6bab1e21b68">Image by storyset</a> on Freepik';
